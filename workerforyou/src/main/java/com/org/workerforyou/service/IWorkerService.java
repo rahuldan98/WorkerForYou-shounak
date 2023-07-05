@@ -3,6 +3,7 @@ package com.org.workerforyou.service;
 import java.util.List;
 
 import com.org.workerforyou.dto.WorkerDto;
+import com.org.workerforyou.model.Customer;
 import com.org.workerforyou.model.Worker;
 
 public interface IWorkerService {
@@ -17,5 +18,5 @@ public interface IWorkerService {
 	
 	public Worker delete(Integer id);
 	
-//	public Worker deassign(Integer id, Integer customerId);
+	public Customer acceptRequest(Integer requestId, Integer acceptanceFlag);
 }

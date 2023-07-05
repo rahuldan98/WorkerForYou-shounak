@@ -7,6 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class CustomerDto {
 
-	private Integer id;
 	private String name;
 }

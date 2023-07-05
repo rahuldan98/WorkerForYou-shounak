@@ -9,8 +9,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class WorkerDto {
 	
-	private Integer id;
-	private String name;
+	private String username;
 	private Role role;
+	
+	
 
 }
