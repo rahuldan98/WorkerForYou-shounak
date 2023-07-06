@@ -12,7 +12,4 @@ public class WorkerConvertor {
 		
 		return Worker.builder().username(workerDto.getUsername()).role(workerDto.getRole()).build();
 	}
-
-	
-	// workerdto -> worker
 }

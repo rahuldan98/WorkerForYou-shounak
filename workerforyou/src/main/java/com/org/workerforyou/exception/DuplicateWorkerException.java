@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 @ResponseStatus(code = HttpStatus.CONFLICT)
 @AllArgsConstructor
 public class DuplicateWorkerException extends RuntimeException {
-	
+
 	private final String message;
 
 }
