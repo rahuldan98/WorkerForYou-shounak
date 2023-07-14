@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,32 +32,36 @@ public class WorkerController {
 
 		return new ResponseEntity<>(workerService.register(workerDto), HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Worker> view(@PathVariable Integer id) {
 
-		return new ResponseEntity<>(workerService.view(id), HttpStatus.CREATED);
+		return new ResponseEntity<>(workerService.view(id), HttpStatus.OK);
 	}
 
 	@GetMapping
 	public ResponseEntity<List<Worker>> viewAll() {
 
-		return new ResponseEntity<>(workerService.viewAll(), HttpStatus.CREATED);
+		return new ResponseEntity<>(workerService.viewAll(), HttpStatus.OK);
 	}
 
-	public ResponseEntity<Worker> update(Integer id, WorkerDto workerDto) {
-		// TODO Auto-generated method stub
-		return null;
+	@PatchMapping("/{id}")
+	public ResponseEntity<Worker> update(@PathVariable Integer id, @RequestBody WorkerDto workerDto) {
+
+		return new ResponseEntity<>(workerService.update(id, workerDto), HttpStatus.OK);
 	}
 
-	public ResponseEntity<Worker> delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Worker> delete(@PathVariable Integer id) {
+
+		return new ResponseEntity<>(workerService.delete(id), HttpStatus.OK);
 	}
 
-	public ResponseEntity<Customer> acceptRequest(Integer requestId, Integer acceptanceFlag) {
-		// TODO Auto-generated method stub
-		return null;
+	@PostMapping("/{requestId}/{acceptanceFlag}")
+	public ResponseEntity<Customer> acceptRequest(@PathVariable Integer requestId,
+			@PathVariable Integer acceptanceFlag) {
+
+		return new ResponseEntity<>(workerService.acceptRequest(requestId, acceptanceFlag), HttpStatus.OK);
 	}
 
 }
