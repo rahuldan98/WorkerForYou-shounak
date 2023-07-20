@@ -27,37 +27,45 @@ public class WorkerServiceImpl implements IWorkerService {
 	public Worker register(WorkerDto workerDto) {
 
 		Optional<Worker> optionalWorker = workerRepository.findByUsername(workerDto.getUsername());
-		
-		if(optionalWorker.isPresent())
+
+		if (optionalWorker.isPresent())
 			throw new DuplicateWorkerException("Duplicate worker present");
-		
+
 		Worker worker = workerConvertor.convert(workerDto);
 		return workerRepository.save(worker);
-		
+
 	}
 
 	@Override
 	public Worker view(Integer id) {
-		
-		return workerRepository.findById(id).orElseThrow(()-> new WorkerNotFoundException("worker not found"));
+
+		return workerRepository.findById(id).orElseThrow(() -> new WorkerNotFoundException("worker not found"));
 	}
 
 	@Override
 	public List<Worker> viewAll() {
-		
+
 		return workerRepository.findAll();
 	}
 
 	@Override
 	public Worker update(Integer id, WorkerDto workerDto) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Worker worker = workerRepository.findById(id)
+				.orElseThrow(() -> new WorkerNotFoundException("Worker not found"));
+		worker.setUsername(workerDto.getUsername());
+		worker.setRole(workerDto.getRole());
+
+		return workerRepository.save(worker);
 	}
 
 	@Override
 	public Worker delete(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Optional<Worker> optionalWorker = Optional.ofNullable(
+				workerRepository.findById(id).orElseThrow(() -> new WorkerNotFoundException("Worker not found")));
+		workerRepository.deleteById(id);
+		return optionalWorker.get();
 	}
 
 	@Override
